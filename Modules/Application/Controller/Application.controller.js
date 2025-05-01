@@ -34,7 +34,7 @@ const CreateApplication = async (req, res) => {
             CV } = req.body;
 
         const newApplication = await Application.create({
-            createdBy: userId,
+            createdBy : userId,
             createdFor: JobId,
             firstName,
             lastName,
@@ -67,3 +67,5 @@ module.exports = {
     ViewApplication,
     CreateApplication
 }
+
+

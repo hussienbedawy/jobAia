@@ -12,18 +12,17 @@ const ViewJobs = async (req, res) => {
 
 const ViewPaginatedJobs = async (req, res) => {
     try {
-        // استخراج رقم الصفحة من استعلام الـ URL (أو استخدام 1 كقيمة افتراضية)
-        let page = parseInt(req.query.page) || 1;
-        let limit = 10; // تعيين حد ثابت للـ limit
+        
+            
+            page= parseInt(req.query.page) || 1,
+            limit=10
 
-        // استدعاء دالة paginate من السكيمة
-        const result = await JobPost.paginate(page, limit);
+        const result = await JobPost.paginate(page,limit);  
 
-        // إرجاع البيانات مع تفاصيل التمرير (pagination)
         return res.status(200).json({
             success: true,
-            count: result.jobs.length,  // عدد العناصر في الصفحة
-            data: result.jobs,  // البيانات نفسها
+            count: result.jobs.length,
+            data: result.jobs,
             pagination: {
                 currentPage: result.currentPage,
                 totalPages: result.totalPages,
@@ -33,12 +32,7 @@ const ViewPaginatedJobs = async (req, res) => {
             }
         });
     } catch (e) {
-        console.error("Error while fetching paginated job posts:", e);  // تسجيل الخطأ في السيرفر
-        return res.status(500).json({
-            success: false,
-            message: "Service unavailable",
-            error: e.message // إرجاع رسالة الخطأ
-        });
+        res.status(500).send({ success: false, data: e.message, message: "service unavailable" });
     }
 };
 

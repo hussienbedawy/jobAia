@@ -8,17 +8,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { AuthRoutes, ApplicationRoutes, FeedbackRoutes, JobPostRoutes, searchRoute, filterRoute } = require("./Routes/routes");
+const { AuthRoutes, ApplicationRoutes, FeedbackRoutes, JobPostRoutes, searchRoute,ProfileRoutes,filterRoute  } = require("./Routes/routes");
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
 
 
-app.use(AuthRoutes);
-app.use(ApplicationRoutes);
-app.use(FeedbackRoutes);
-app.use(JobPostRoutes);
+app.use(AuthRoutes)
+app.use(ApplicationRoutes)
+app.use(FeedbackRoutes)
+app.use(JobPostRoutes)
 app.use(searchRoute)
+app.use(ProfileRoutes)
 app.use(filterRoute)
 
 
